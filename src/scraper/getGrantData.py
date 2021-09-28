@@ -133,7 +133,7 @@ class GetGrantData:
     def _getAdditionalInfo(self, soup) -> dict:
         container = soup.find(id='synopsisDetailsAdditionalInfoTable')
         if container.find('tr') is None:
-            container = soup.find(id='forecaseDetailsAdditionalInfoTable')
+            container = soup.find(id='forecastDetailsAdditionalInfoTable')
 
         if container is None:
             raise RuntimeError('Container not found')
