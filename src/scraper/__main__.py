@@ -18,9 +18,10 @@ def main():
     initialLink = r'https://www.grants.gov/web/grants/search-grants.html'
 
     driver.get(initialLink)
-    #switching to the iframe that the data is in
-    # initialContent = HtmlRetriever.main(initialLink)
-    IterateGrantItems(driver).iterate()
+    
+    #set initial settings for what is to be scraped
+
+    IterateGrantItems(driver).iterateAndGetInfo()
 
     time.sleep(5)
 

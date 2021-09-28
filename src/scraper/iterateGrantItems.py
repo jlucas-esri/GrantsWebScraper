@@ -1,10 +1,11 @@
 import logging
 import time
+from selenium.webdriver.chrome import webdriver
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
-
+from scraper.getGrantData import GetGrantData
 
 class IterateGrantItems:
     logger = logging.getLogger(__name__)
@@ -27,14 +28,19 @@ class IterateGrantItems:
             result = results[resultIdx]
             detailsLink = result.find_element_by_css_selector("a[title=\"Click to View Grant Opportunity\"]")
             detailsLink.click()
+
+            #giving time for the page to load
+            time.sleep(1)
+
+            #retrieve the data
+            data = GetGrantData.run(self.driver)
             
-            time.sleep(5)
+            # time.sleep(5)
 
             #go back to previous page
             self.driver.execute_script("window.history.go(-1)")
-            # while True:
-            #     pass
             time.sleep(0.3)
+
             self.driver.switch_to.default_content()
             self.driver.switch_to_frame('embeddedIframe')
             WebDriverWait(self.driver, 5).until(EC.presence_of_element_located((By.ID, 'searchResultsDiv')))
@@ -44,6 +50,10 @@ class IterateGrantItems:
         """
         Finds all the links associated with detail pages and navigates to them
         """
+
+        #allowing time for the page to load
+        time.sleep(1)
+
         searchResultsDiv = self.driver.find_element_by_id('searchResultsDiv')
         self.logger.debug('past getting table div')
 
