@@ -55,7 +55,7 @@ class GetGrantData:
         #getting additional info
         synopsisData.update({'additional': self._getAdditionalInfo(soup)})
 
-        pprint(synopsisData)
+        # pprint(synopsisData)
         return synopsisData
 
     def _recordEntries(self, entries) -> dict:
